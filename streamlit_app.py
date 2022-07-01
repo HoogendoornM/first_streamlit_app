@@ -4,4 +4,4 @@ streamlit.title('Streamlit tutorial')
 
 streamlit.header('A diner menu')
 streamlit.text('Waffles!')
-streamlit.title('Oranges')
+streamlit.text('Oranges')

@@ -1,3 +1,7 @@
 import streamlit
 
-streamlit.title('A Streamlit tutorial')
+streamlit.title('Streamlit tutorial')
+
+streamlit.header('A diner menu')
+streamlit.text('Waffles!')
+streamlit.title('Oranges')

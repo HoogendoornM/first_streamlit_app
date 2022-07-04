@@ -15,7 +15,6 @@ streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
 # Load fruit CSV
 df = pd.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
-
 # Set fruit as index
 df = df.set_index('Fruit')
 
@@ -51,17 +50,25 @@ try:
 except URLError as e:
     streamlit.error()
 
-streamlit.stop() #DEBUGGING MODE
+streamlit.stop() #DEBUGGING STOP HERE
 
-# Connector data
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("SELECT * FROM fruit_load_list")
-my_data_rows = my_cur.fetchall()
-streamlit.header("Fruit list:")
-streamlit.dataframe(my_data_rows)
+# Snowflake connection data
+streamlit.header("Snowflake fruit data")
 
-add_my_fruit = streamlit.text_input('What fruit would you like add?')
+# Retrieve data function
+def get_fruit_load_list():
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("SELECT * FROM fruit_load_list")
+        return my_cur.fetchall()
 
-streamlit.write('Trying to add: ', add_my_fruit)
-my_cur.execute("INSERT INTO fruit_load_list (FRUIT_NAME) VALUES ('from streamlit');")
+
+# Button to trigger data retrieval
+if streamlit.button("Get fruit data"):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_data_rows = get_fruit_load_list()
+    streamlit.dataframe(my_data_rows)
+
+
+#add_my_fruit = streamlit.text_input('What fruit would you like add?')
+#streamlit.write('Trying to add: ', add_my_fruit)
+#my_cur.execute("INSERT INTO fruit_load_list (FRUIT_NAME) VALUES ('from streamlit');")

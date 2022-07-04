@@ -51,5 +51,5 @@ my_cur.execute("insert into fruit_load_list VALUES" + add_my_fruit)
 
 my_cur.execute(
         "INSERT INTO fruit_load_list VALUES " + 
-        "    ("+ add_my_fruit + "), "
+        "    ("+ add_my_fruit + "); "
         )

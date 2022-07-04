@@ -50,8 +50,6 @@ try:
 except URLError as e:
     streamlit.error()
 
-streamlit.stop() #DEBUGGING STOP HERE
-
 # Snowflake connection data
 streamlit.header("Snowflake fruit data")
 
